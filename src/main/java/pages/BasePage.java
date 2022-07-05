@@ -1,13 +1,17 @@
 package pages;
 
 import core.DriverFactory;
+import io.cucumber.datatable.DataTable;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 
 public class BasePage {
 
@@ -96,5 +100,27 @@ public class BasePage {
 
         espera(3);
     }
+
+    public void selecionarPorValue(WebElement elemento, String valor) {
+        Select selectDateDays = new Select(elemento);
+        selectDateDays.selectByValue(valor);
+    }
+
+    public void selecionarPorTexto(WebElement elemento, String texto) {
+        Select selectDateDays = new Select(elemento);
+        selectDateDays.selectByVisibleText(texto);
+    }
+
+    public void selecionarPrimeiro(WebElement elemento) {
+        Select select = new Select(elemento);
+        select.selectByIndex(0);
+    }
+
+
+    public static String getData(DataTable dt, String parameter) {
+        List<Map<String, String>> list = dt.asMaps(String.class, String.class);
+        return list.get(0).get(parameter).toString();
+    }
+
 
 }

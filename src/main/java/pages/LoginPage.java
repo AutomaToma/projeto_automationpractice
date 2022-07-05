@@ -1,5 +1,6 @@
 package pages;
 
+import com.github.javafaker.Faker;
 import core.DriverFactory;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,8 @@ public class LoginPage extends BasePage{
     @FindBy(id = "SubmitCreate")
     private WebElement createAnAccount;
 
+    Faker faker=new Faker();
+
 //    Metodos
 
     public void validarPagina(){
@@ -32,7 +35,7 @@ public class LoginPage extends BasePage{
     }
 
     public void preencherEmail(){
-        emailCreate.sendKeys("joao@tralala.com");
+        emailCreate.sendKeys(faker.dragonBall().character().trim() + faker.gameOfThrones().dragon().trim() + "@gmail.com");
     }
 
     public void clicarEmCriar(){

@@ -5,6 +5,7 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import pages.BasePage;
+import pages.CadastroPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -12,6 +13,7 @@ public class CadastroSteps {
 
     HomePage home = new HomePage();
     LoginPage login = new LoginPage();
+    CadastroPage cadastro = new CadastroPage();
 
     @Dado("que o usuário acesse a página de cadastro")
     public void que_o_usuario_acesse_a_pagina_de_cadastro() {
@@ -24,6 +26,8 @@ public class CadastroSteps {
         login.validarPagina();
         login.preencherEmail();
         login.clicarEmCriar();
+        cadastro.tituloCriarConta();
+        cadastro.preencherFormulario(dataTable);
     }
 
     @Então("o cadastro é realizado com sucesso")
@@ -31,4 +35,6 @@ public class CadastroSteps {
 
 
     }
+
+
 }
