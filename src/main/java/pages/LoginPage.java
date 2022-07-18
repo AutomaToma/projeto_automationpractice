@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import core.DriverFactory;
+import io.cucumber.datatable.DataTable;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,7 @@ public class LoginPage extends BasePage{
     public LoginPage() {
         PageFactory.initElements(driver, this);
     }
+    Faker faker=new Faker();
 
 //    Mapeamento
 
@@ -26,7 +28,14 @@ public class LoginPage extends BasePage{
     @FindBy(id = "SubmitCreate")
     private WebElement createAnAccount;
 
-    Faker faker=new Faker();
+    @FindBy(id = "email")
+    private WebElement emailAddress;
+
+    @FindBy(id = "passwd")
+    private WebElement password;
+
+    @FindBy(id = "SubmitLogin")
+    private WebElement signIn;
 
 //    Metodos
 
@@ -35,11 +44,17 @@ public class LoginPage extends BasePage{
     }
 
     public void preencherEmail(){
-        emailCreate.sendKeys(faker.dragonBall().character().trim() + faker.gameOfThrones().dragon().trim() + "@gmail.com");
+        emailCreate.sendKeys(faker.dragonBall().character().replaceAll(" ","") + faker.gameOfThrones().dragon().replaceAll(" ","") + "@gmail.com");
     }
 
     public void clicarEmCriar(){
         createAnAccount.click();
     }
 
+    public void logar(DataTable dataTable ){
+        emailAddress.sendKeys(getData(dataTable, "Email"));
+        password.sendKeys(getData(dataTable,"Password"));
+        signIn.click();
+        espera(2);
+    }
 }
