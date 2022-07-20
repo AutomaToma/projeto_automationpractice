@@ -1,0 +1,62 @@
+package steps;
+
+import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
+import io.cucumber.java.pt.Entao;
+import io.cucumber.java.pt.Quando;
+import pages.CompraPage;
+import pages.HomePage;
+import pages.LoginPage;
+import pages.MyAccountPage;
+
+public class CompraSteps {
+
+    HomePage home = new HomePage();
+    LoginPage login = new LoginPage();
+    MyAccountPage myAccount = new MyAccountPage();
+    CompraPage compra = new CompraPage();
+
+
+    @Dado("que esteja logado na pagina inicial")
+    public void que_esteja_logado_na_pagina_inicial() {
+        home.validarHome();
+        home.signIn();
+        login.validarPagina();
+
+    }
+
+    @E("acesse uma categoria {string}")
+    public void acesse_uma_categoria(String categoria) {
+        compra.selecionarCategoria(categoria);
+
+    }
+
+    @E("tenha escolhido o {string} e {int} com {string} e {string} para compra")
+    public void tenha_escolhido_o_e_com_e_para_compra(String produto, Integer quantidade, String cor, String tamanho) {
+        compra.selecionarProduto(produto);
+
+    }
+
+    @E("validar o produto na tela de checkout")
+    public void validar_o_produto_na_tela_de_checkout() {
+
+    }
+
+    @E("confirmar o endereco e opcao de entrega")
+    public void confirmar_o_endereco_e_opcao_de_entrega() {
+
+    }
+
+    @Quando("escolher a forma de pagamento {string} e finalizar a compra")
+    public void escolher_a_forma_de_pagamento_e_finalizar_a_compra(String string) {
+
+    }
+
+    @Entao("a compra devera ser realizada com sucesso")
+    public void a_compra_devera_ser_realizada_com_sucesso() {
+
+    }
+
+
+
+}
