@@ -25,16 +25,17 @@ public class CompraSteps {
 
     }
 
-    @E("acesse uma categoria {string}")
-    public void acesse_uma_categoria(String categoria) {
-        compra.selecionarCategoria(categoria);
+    @E("acesse uma categoria {string} e subcategoria {string}")
+    public void acesse_uma_categoria_e_subcategoria(String categoria, String subcategoria) {
+        compra.selecionarCategoria(categoria, subcategoria);
 
     }
 
     @E("tenha escolhido o {string} e {int} com {string} e {string} para compra")
     public void tenha_escolhido_o_e_com_e_para_compra(String produto, Integer quantidade, String cor, String tamanho) {
         compra.selecionarProduto(produto);
-
+        compra.finalizarSelecaoProduto(quantidade, tamanho, cor);
+        compra.prosseguirParaOCheckout();
     }
 
     @E("validar o produto na tela de checkout")

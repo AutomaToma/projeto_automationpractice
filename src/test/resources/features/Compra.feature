@@ -8,7 +8,7 @@ Funcionalidade: Realizar Compra
     E preencher os campos com dados validos:
       | Email                       | Password |
       | brunoaushduhashdu@gmail.com | 123456   |
-    E acesse uma categoria "T-shirts"
+    E acesse uma categoria "T-shirts" e subcategoria ""
     E tenha escolhido o "<produto>" e <quantidade> com "<cor>" e "<tamanho>" para compra
     E validar o produto na tela de checkout
     E confirmar o endereco e opcao de entrega

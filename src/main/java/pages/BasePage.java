@@ -17,6 +17,7 @@ public class BasePage {
 
     WebDriver driver  = DriverFactory.getDriver();
     JavascriptExecutor js;
+    Actions action = new Actions(driver);
 
     public void espera(int segundos) {
         try {
@@ -120,6 +121,13 @@ public class BasePage {
     public static String getData(DataTable dt, String parameter) {
         List<Map<String, String>> list = dt.asMaps(String.class, String.class);
         return list.get(0).get(parameter).toString();
+    }
+
+    public void moveMouseToElement (WebElement element){
+
+        action.moveToElement(element)
+                .perform();
+        System.out.println("movendo o mouse até o elemento" + element);
     }
 
 
