@@ -13,6 +13,9 @@ public class CompraSteps {
     MyAccountPage myAccount = new MyAccountPage();
     CompraPage compra = new CompraPage();
     SummaryPage summary = new SummaryPage();
+    ShippingPage shipping = new ShippingPage();
+    PagamentoPage pagamentoPage = new PagamentoPage();
+    OrderSummaryPage orderSummary = new OrderSummaryPage();
 
 
     @Dado("que esteja logado na pagina inicial")
@@ -40,24 +43,27 @@ public class CompraSteps {
     public void validar_o_produto_na_tela_de_checkout() {
         summary.validarPagina();
         summary.ValidarCompra();
-
     }
 
     @E("confirmar o endereco e opcao de entrega")
     public void confirmar_o_endereco_e_opcao_de_entrega() {
-
+        summary.clicarEmProsseguirParaOCheckout();
+        shipping.validarPagina();
+        shipping.validarValorFrete();
+        shipping.aceitarTermosDeServico();
     }
 
     @Quando("escolher a forma de pagamento {string} e finalizar a compra")
-    public void escolher_a_forma_de_pagamento_e_finalizar_a_compra(String string) {
-
+    public void escolher_a_forma_de_pagamento_e_finalizar_a_compra(String pagamento) {
+        pagamentoPage.validarPagina();
+        pagamentoPage.validarInformacoesDaCompra();
+        pagamentoPage.escolherFormaDePagamento(pagamento);
     }
 
     @Entao("a compra devera ser realizada com sucesso")
     public void a_compra_devera_ser_realizada_com_sucesso() {
-
+        orderSummary.validarPagina();
     }
-
 
 
 }

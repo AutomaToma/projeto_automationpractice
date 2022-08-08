@@ -117,8 +117,8 @@ public class CompraPage extends BasePage {
 
         esperarElementoEstarClicavel(btnProssguirParaCheckout, 5);
         btnProssguirParaCheckout.click();
-
-
     }
+
+
 
 }

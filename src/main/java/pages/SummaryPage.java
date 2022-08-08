@@ -3,6 +3,7 @@ package pages;
 import core.DriverFactory;
 import helpers.ValidationsHelper;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,6 +50,12 @@ public class SummaryPage extends BasePage {
 
         btnCheckout.click();
 
+    }
+    public void clicarEmProsseguirParaOCheckout(){
+        WebElement btnProsseguirParaOCheckout = driver.findElement(By.xpath("(//span[contains(text(),'Proceed to checkout')])[2]"));
+        esperarElementoEstarVisivel(btnProsseguirParaOCheckout, 5);
+        esperarElementoEstarClicavel(btnProsseguirParaOCheckout, 5);
+        btnProsseguirParaOCheckout.click();
     }
 
 }
