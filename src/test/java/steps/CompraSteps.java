@@ -4,10 +4,7 @@ import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
 import io.cucumber.java.pt.Entao;
 import io.cucumber.java.pt.Quando;
-import pages.CompraPage;
-import pages.HomePage;
-import pages.LoginPage;
-import pages.MyAccountPage;
+import pages.*;
 
 public class CompraSteps {
 
@@ -15,6 +12,7 @@ public class CompraSteps {
     LoginPage login = new LoginPage();
     MyAccountPage myAccount = new MyAccountPage();
     CompraPage compra = new CompraPage();
+    SummaryPage summary = new SummaryPage();
 
 
     @Dado("que esteja logado na pagina inicial")
@@ -40,6 +38,8 @@ public class CompraSteps {
 
     @E("validar o produto na tela de checkout")
     public void validar_o_produto_na_tela_de_checkout() {
+        summary.validarPagina();
+        summary.ValidarCompra();
 
     }
 

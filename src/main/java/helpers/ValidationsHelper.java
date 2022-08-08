@@ -3,13 +3,12 @@ package helpers;
 public class ValidationsHelper {
 
     // -------- Atributos --------
-    String nomeProduto;
-    float valorUnitario;
-    int quantidade;
-    String tamanho;
-    String cor;
-    float valorFrete;
-
+    static String nomeProduto;
+    static float valorUnitario;
+    static int quantidade;
+    static String tamanho;
+    static String cor;
+    static float valorFrete;
 
     // -------- Getters e Setters --------
 
@@ -66,6 +65,7 @@ public class ValidationsHelper {
     public float calcularTotalDoProduto(float valorUnitario, int quantidade){
         return (valorUnitario * quantidade);
     }
+    public float calcularTotalDaCompra() { return (calcularTotalDoProduto(valorUnitario,quantidade) + valorFrete); }
 
 
 }
