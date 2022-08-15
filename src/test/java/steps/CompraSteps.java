@@ -65,5 +65,17 @@ public class CompraSteps {
         orderSummary.validarPagina();
     }
 
+    @E("acesso a vitrine My store")
+    public void acessoAVitrineMyStore() {
+        compra.voltarHome();
+    }
+
+    @E("tenho escolho um {string}")
+    public void tenhoEscolhoUm(String produto) {
+        compra.selecionarProdutoVitrine(produto);
+
+    }
 
 }
+
+

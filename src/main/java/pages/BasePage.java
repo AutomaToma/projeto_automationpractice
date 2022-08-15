@@ -123,7 +123,7 @@ public class BasePage {
         return list.get(0).get(parameter).toString();
     }
 
-    public void moveMouseToElement (WebElement element){
+    public void moverMouseParaElemento (WebElement element){
 
         action.moveToElement(element)
                 .perform();

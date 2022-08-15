@@ -41,6 +41,9 @@ public class CompraPage extends BasePage {
     @FindBy(xpath = "//span[@class='ajax_cart_shipping_cost']")
     private WebElement txtValorFrete;
 
+    @FindBy(xpath = "//a[@title = 'My Store']")
+    private WebElement titleVitrine;
+
 
     //MÉTODO
 
@@ -52,7 +55,7 @@ public class CompraPage extends BasePage {
             categoria1.click();
         } else {
             categoria1 = driver.findElement(By.xpath("(//a[text() = '" + categoria + "'])"));
-            moveMouseToElement(categoria1);
+            moverMouseParaElemento(categoria1);
             WebElement sub = driver.findElement(By.xpath("//a[text()='" + subcategoria + "']"));
             sub.click();
         }
@@ -119,6 +122,21 @@ public class CompraPage extends BasePage {
         btnProssguirParaCheckout.click();
     }
 
+    public void voltarHome(){
+        titleVitrine.click();
+    }
 
+    public void selecionarProdutoVitrine(String produto) {
+        WebElement prod = driver.findElement(By.xpath("//a[contains(text(),'" + produto + "')]"));
+        rolarAteOElemento(prod);
+        moverMouseParaElemento(prod);
+
+        espera(5);
+        WebElement addCarrinho = driver.findElement(By.xpath("(//a[contains(text(),'" + produto + "')])[1]//../../div//a[@title='Add to cart']//span"));
+        addCarrinho.click();
+
+    }
+
+    // TODO: 15/08/2022 Falta checkout 
 
 }
