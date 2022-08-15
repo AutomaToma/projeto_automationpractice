@@ -33,7 +33,7 @@ public class PagamentoPage extends BasePage {
     @FindBy(xpath = "//span[contains(@id,'product_price_')]//span")
     private WebElement valorUnitario;
 
-    @FindBy(className = "cart_quantity text-center")
+    @FindBy(xpath = "//*[contains(@class,'cart_quantity')]")
     private WebElement quantidade;
 
     @FindBy(xpath = "//td[@class='cart_total']//span")
@@ -60,7 +60,7 @@ public class PagamentoPage extends BasePage {
         float valorUnit = Float.parseFloat(valorUnitario.getText().replaceAll("\\$", ""));
         Assert.assertTrue("O valor unitário não está correto", helper.getValorUnitario() == valorUnit);
 
-        int qtd = Integer.parseInt(valorUnitario.getText());
+        int qtd = Integer.parseInt(quantidade.getText());
         Assert.assertTrue("A quantidade está incorreta", helper.getQuantidade() == qtd);
 
         float totalProd = Float.parseFloat(valorTotalProduto.getText().replaceAll("\\$", ""));
