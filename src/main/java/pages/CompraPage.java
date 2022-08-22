@@ -44,6 +44,17 @@ public class CompraPage extends BasePage {
     @FindBy(xpath = "//a[@title = 'My Store']")
     private WebElement titleVitrine;
 
+    @FindBy(id = "layer_cart_product_attributes")
+    private  WebElement txtCorETamanho;
+
+    @FindBy(id = "layer_cart_product_quantity")
+    private WebElement txtQuantidade;
+
+    @FindBy(id = "layer_cart_product_price")
+    private WebElement txtValorProduto;
+
+
+
 
     //MÉTODO
 
@@ -103,6 +114,14 @@ public class CompraPage extends BasePage {
     public void prosseguirParaOCheckout() {
         esperarElementoEstarVisivel(iconeOK, 10);
 
+        //Salvando infos do produto
+        String [] corETamanho = txtCorETamanho.getText().split(",");
+        helper.setCor(corETamanho[0]);
+        helper.setTamanho(corETamanho[1].trim());
+        helper.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        helper.setValorUnitario(Float.parseFloat(txtValorProduto.getText().replaceAll("\\$", "")));
+
+
         //Convertendo o valor do frete de String para Float e salvando
         helper.setValorFrete(Float.parseFloat(txtValorFrete.getText().replaceAll("\\$", "")));
 
@@ -130,10 +149,12 @@ public class CompraPage extends BasePage {
         WebElement prod = driver.findElement(By.xpath("//a[contains(text(),'" + produto + "')]"));
         rolarAteOElemento(prod);
         moverMouseParaElemento(prod);
+        helper.setNomeProduto(produto);
 
         espera(5);
         WebElement addCarrinho = driver.findElement(By.xpath("(//a[contains(text(),'" + produto + "')])[1]//../../div//a[@title='Add to cart']//span"));
         addCarrinho.click();
+        prosseguirParaOCheckout();
 
     }
 

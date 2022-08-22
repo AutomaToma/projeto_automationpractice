@@ -22,8 +22,8 @@ public class SummaryPage extends BasePage {
     @FindBy(id = "cart_title")
     private WebElement txtValidarPagina;
 
-    @FindBy(xpath = "//a[text()='Faded Short Sleeve T-shirts']")
-    private WebElement txtProduto;
+//    @FindBy(xpath = "(//p[@class = 'product-name']/a)[1]")
+//    private WebElement txtProduto;
 
     @FindBy(id = "total_price")
     private WebElement txtPrecoTotal;
@@ -40,12 +40,15 @@ public class SummaryPage extends BasePage {
 
     public void ValidarCompra(){
 
+        espera(3);
+
         float totalProduto = Float.parseFloat(txtPrecoTotal.getText().replace("$",""));
         float calculoPrecoTotal = validations.calcularTotalDaCompra();
+        WebElement txtProduto = driver.findElement(By.xpath("(//a[contains(text(),'" + validations.getNomeProduto() + "')])[1]"));
 
         System.out.println(calculoPrecoTotal + " tem que ser igual " + totalProduto);
 
-        Assert.assertEquals(validations.getNomeProduto(),txtProduto.getText());
+        Assert.assertEquals(validations.getNomeProduto(),txtProduto.getText().trim());
         Assert.assertTrue("Os valores são diferentes",calculoPrecoTotal==totalProduto);
 
         btnCheckout.click();
