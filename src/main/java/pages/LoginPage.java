@@ -3,6 +3,8 @@ package pages;
 import com.github.javafaker.Faker;
 import core.DriverFactory;
 import io.cucumber.datatable.DataTable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,7 +17,8 @@ public class LoginPage extends BasePage{
     public LoginPage() {
         PageFactory.initElements(driver, this);
     }
-    Faker faker=new Faker();
+    Faker faker = new Faker();
+    Logger logger = LogManager.getLogger(this);
 
 //    Mapeamento
 
@@ -40,21 +43,40 @@ public class LoginPage extends BasePage{
 //    Metodos
 
     public void validarPagina(){
+        logger.info("Validando página.");
+
         Assert.assertTrue(validarPagina.isDisplayed());
+
+        logger.info("Página validada.");
     }
 
     public void preencherEmail(){
-        emailCreate.sendKeys(faker.dragonBall().character().replaceAll(" ","") + faker.gameOfThrones().dragon().replaceAll(" ","") + "@gmail.com");
+        String email = faker.dragonBall().character().replaceAll(" ","") + faker.gameOfThrones().dragon().replaceAll(" ","") + "@gmail.com";
+
+        logger.info("Email a ser preenchido: " + email);
+
+        emailCreate.sendKeys(email);
+
+        logger.info("Email preenchido");
     }
 
     public void clicarEmCriar(){
+        logger.info("Clicando em 'criar conta'.");
+
         createAnAccount.click();
+
+        logger.info("'Criar conta' acessado.");
     }
 
     public void logar(DataTable dataTable ){
+        logger.info("Preenchendo dados: " + getData(dataTable, "Email"));
+        logger.info("Preenchendo dados: " + getData(dataTable, "Password"));
+
         emailAddress.sendKeys(getData(dataTable, "Email"));
         password.sendKeys(getData(dataTable,"Password"));
         signIn.click();
         espera(2);
+
+        logger.info("Dados preenchidos, acessado signin.");
     }
 }

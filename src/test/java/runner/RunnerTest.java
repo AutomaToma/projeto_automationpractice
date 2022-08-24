@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
         monochrome = true,
         snippets = CucumberOptions.SnippetType.CAMELCASE,
         plugin = "pretty",
-        tags = "@TESTE-04"
+        tags = "@TESTE-02"
 )
 
 public class RunnerTest {
