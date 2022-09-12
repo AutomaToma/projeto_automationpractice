@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import core.DriverFactory;
+import evidences.Evidences;
 import io.cucumber.datatable.DataTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +20,7 @@ public class LoginPage extends BasePage{
     }
     Faker faker = new Faker();
     Logger logger = LogManager.getLogger(this);
+    Evidences evidences = new Evidences();
 
 //    Mapeamento
 
@@ -57,6 +59,7 @@ public class LoginPage extends BasePage{
 
         emailCreate.sendKeys(email);
 
+        evidences.tirarPrint("Email preenchido");
         logger.info("Email preenchido");
     }
 
@@ -74,6 +77,8 @@ public class LoginPage extends BasePage{
 
         emailAddress.sendKeys(getData(dataTable, "Email"));
         password.sendKeys(getData(dataTable,"Password"));
+
+        evidences.tirarPrint("Email e Password preenchidos");
         signIn.click();
         espera(2);
 

@@ -1,6 +1,7 @@
 package pages;
 
 import core.DriverFactory;
+import evidences.Evidences;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
@@ -17,6 +18,7 @@ public class MyAccountPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
     Logger logger = LogManager.getLogger(this);
+    Evidences evidences = new Evidences();
 
     @FindBy(id = "center_column")
     private WebElement myAccount;
@@ -27,6 +29,7 @@ public class MyAccountPage extends BasePage {
         esperarElementoEstarVisivel(myAccount,15);
         Assert.assertTrue(myAccount.isDisplayed());
         espera(3);
+        evidences.tirarPrint("Página My Account validada");
 
         logger.info("Página My Account validada");
     }

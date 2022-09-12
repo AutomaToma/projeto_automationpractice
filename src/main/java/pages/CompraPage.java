@@ -1,7 +1,10 @@
 package pages;
 
 import core.DriverFactory;
+import evidences.Evidences;
 import helpers.ValidationsHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +16,8 @@ public class CompraPage extends BasePage {
 
     WebDriver driver = DriverFactory.getDriver();
     ValidationsHelper helper = new ValidationsHelper();
+    Evidences evidences = new Evidences();
+    Logger logger = LogManager.getLogger(this);
 
     public CompraPage() {
         PageFactory.initElements(driver, this);
@@ -63,19 +68,27 @@ public class CompraPage extends BasePage {
 
         if (subcategoria.isEmpty()) {
             categoria1 = driver.findElement(By.xpath("(//a[text() = '" + categoria + "'])[2]"));
+
+            logger.info("Categoria selecionada " + categoria1.getText());
+            evidences.tirarPrint("Categoria selecionada");
             categoria1.click();
         } else {
             categoria1 = driver.findElement(By.xpath("(//a[text() = '" + categoria + "'])"));
             moverMouseParaElemento(categoria1);
             WebElement sub = driver.findElement(By.xpath("//a[text()='" + subcategoria + "']"));
+
+            logger.info("Categoria selecionada " + categoria1.getText() + " Subcategoria selecionada " + sub.getText());
+            evidences.tirarPrint("Categoria e Subcategoria selecionadas");
             sub.click();
         }
 
-        System.out.println("Selecionada categoria " + categoria);
     }
 
     public void selecionarProduto(String produto) {
         WebElement prod = driver.findElement(By.xpath("//a[contains(text(),'" + produto + "')]"));
+
+        logger.info("Produto selecionado "  + prod);
+        evidences.tirarPrint("Produto selecionado");
         prod.click();
 
         //salvando nome do produto
@@ -99,16 +112,19 @@ public class CompraPage extends BasePage {
         esperarElementoEstarClicavel(corElemento, 5);
         corElemento.click();
 
+        logger.info("Selecionado quantidade " + quantidade + " Tamanho " + tamanho + " Cor " + cor);
+        evidences.tirarPrint("Quantidade, tamanho e cor selecionados");
+
         esperarElementoEstarClicavel(btnAdicionarAoCarrinho, 5);
         btnAdicionarAoCarrinho.click();
 
         //mostrando que tá salvando
-        System.out.println("------ VALORES SALVOS -----");
-        System.out.println(helper.getValorUnitario());
-        System.out.println(helper.getTamanho());
-        System.out.println(helper.getCor());
-        System.out.println(helper.getQuantidade());
-        System.out.println("----------------------------");
+//        System.out.println("------ VALORES SALVOS -----");
+//        System.out.println(helper.getValorUnitario());
+//        System.out.println(helper.getTamanho());
+//        System.out.println(helper.getCor());
+//        System.out.println(helper.getQuantidade());
+//        System.out.println("----------------------------");
     }
 
     public void prosseguirParaOCheckout() {
@@ -124,6 +140,7 @@ public class CompraPage extends BasePage {
 
         //Convertendo o valor do frete de String para Float e salvando
         helper.setValorFrete(Float.parseFloat(txtValorFrete.getText().replaceAll("\\$", "")));
+        logger.info("Conversão valor frete");
 
         //validando modal de produto adicionado ao carrinho
         WebElement txtItemAdicionadoAoCarrinho = driver.findElement(By.xpath("//span[@class='ajax_cart_product_txt ']//parent::h2"));
@@ -136,12 +153,14 @@ public class CompraPage extends BasePage {
         else{
             Assert.assertEquals("There is " + helper.getQuantidade() + " item in your cart.", txtItemAdicionadoAoCarrinho.getText());
         }
+        evidences.tirarPrint("Prosseguindo para checkout");
 
         esperarElementoEstarClicavel(btnProssguirParaCheckout, 5);
         btnProssguirParaCheckout.click();
     }
 
     public void voltarHome(){
+        logger.info("Voltando para home");
         titleVitrine.click();
     }
 
@@ -153,11 +172,14 @@ public class CompraPage extends BasePage {
 
         espera(5);
         WebElement addCarrinho = driver.findElement(By.xpath("(//a[contains(text(),'" + produto + "')])[1]//../../div//a[@title='Add to cart']//span"));
+
+        logger.info("Produto da vitrine selecionado");
+        evidences.tirarPrint("Produto da vitrine selecionado");
+
         addCarrinho.click();
         prosseguirParaOCheckout();
 
     }
 
-    // TODO: 15/08/2022 Falta checkout 
 
 }

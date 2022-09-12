@@ -1,7 +1,10 @@
 package pages;
 
 import core.DriverFactory;
+import evidences.Evidences;
 import io.cucumber.datatable.DataTable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +14,9 @@ import org.openqa.selenium.support.PageFactory;
 public class CadastroPage extends BasePage {
 
     WebDriver driver = DriverFactory.getDriver();
+    Evidences evidences = new Evidences();
+    Logger logger = LogManager.getLogger(this);
+
 
     public CadastroPage() {
         PageFactory.initElements(driver, this);
@@ -98,6 +104,8 @@ public class CadastroPage extends BasePage {
         selecionarPorValue(months, data[1]);
         selecionarPorValue(years, data[2]);
 
+        evidences.tirarPrint("Informações inseridas");
+
         addressFirstName.sendKeys(getData(dataTable, "AddressFirstName"));
         addressLastName.sendKeys(getData(dataTable, "AddressLastName"));
         address.sendKeys(getData(dataTable, "Address"));
@@ -107,6 +115,9 @@ public class CadastroPage extends BasePage {
         country.sendKeys(getData(dataTable, "Country"));
         cell.sendKeys(getData(dataTable, "MobilePhone"));
         aliasAddress.sendKeys(getData(dataTable, "AddressAlias"));
+
+        evidences.tirarPrint("Endereço preenchido");
+
         register.click();
 
     }

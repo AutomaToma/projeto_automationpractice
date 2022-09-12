@@ -1,7 +1,10 @@
 package pages;
 
 import core.DriverFactory;
+import evidences.Evidences;
 import io.cucumber.datatable.DataTable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
@@ -18,12 +21,15 @@ public class BasePage {
     WebDriver driver  = DriverFactory.getDriver();
     JavascriptExecutor js;
     Actions action = new Actions(driver);
+    Evidences evidences = new Evidences();
+    Logger logger = LogManager.getLogger(this);
 
     public void espera(int segundos) {
         try {
             Thread.sleep(segundos * 1000);
+            logger.info("Esperando " + segundos + " segundos.");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.info("Erro no método de espera");
         }
     }
 
