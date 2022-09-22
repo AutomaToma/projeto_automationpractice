@@ -2,6 +2,8 @@ package pages;
 
 import core.DriverFactory;
 import helpers.ValidationsHelper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +15,7 @@ public class PagamentoPage extends BasePage {
     //Instancias
     WebDriver driver = DriverFactory.getDriver();
     ValidationsHelper helper = new ValidationsHelper();
+    Logger logger = LogManager.getLogger(this);
 
     //Construtor
     public PagamentoPage() {
@@ -48,11 +51,16 @@ public class PagamentoPage extends BasePage {
     // Métodos
 
     public void validarPagina() {
+        logger.info("Validando página " + tituloPagina.getText());
         esperarElementoEstarVisivel(tituloPagina, 10);
         Assert.assertEquals("PLEASE CHOOSE YOUR PAYMENT METHOD", tituloPagina.getText());
+
+        logger.info("Página validada.");
     }
 
     public void validarInformacoesDaCompra() {
+
+        logger.info("Validando informações da compra");
         Assert.assertEquals(helper.getNomeProduto(), nomeProduto.getText());
         Assert.assertTrue("Não contém a cor correta do produto", corETamanho.getText().contains(helper.getCor()));
         Assert.assertTrue("Não contém o tamanho correto do produto", corETamanho.getText().contains(helper.getTamanho()));
@@ -72,11 +80,17 @@ public class PagamentoPage extends BasePage {
         float totalCompraNaPagina = Float.parseFloat(valorTotalDaCompra.getText().replaceAll("\\$", ""));
         Assert.assertTrue("Valor total da compra diferente", helper.calcularTotalDaCompra() == totalCompraNaPagina);
 
+        logger.info("Informações validadas com sucesso.");
+
     }
 
     public void escolherFormaDePagamento(String metodo) {
+
+        logger.info("Verificando método de pagamento");
         WebElement metodoPagamento = driver.findElement(By.xpath("//a[@class='" + metodo + "']"));
         esperarElementoEstarClicavel(metodoPagamento, 10);
+
+        logger.info("Método de pagamento verificado");
 
         metodoPagamento.click();
     }

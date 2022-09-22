@@ -1,6 +1,7 @@
 package evidences;
 
 import core.DriverFactory;
+import helpers.ValidationsHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +17,14 @@ import java.util.Date;
 public class Evidences {
 
     Logger logger = LogManager.getLogger(this);
+    ValidationsHelper helper = new ValidationsHelper();
 
     public void tirarPrint(String mensagem){
-        SimpleDateFormat fomatar = new SimpleDateFormat("dd-MM-yyyy");
+        String ct = helper.getCt();
+        SimpleDateFormat fomatar = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss");
+        SimpleDateFormat fomatarHora = new SimpleDateFormat("HH-mm");
         String pastaDoPrint = fomatar.format(new Date());
-        String caminhoDoPrint = ".//evidences//" + pastaDoPrint + "//" + mensagem + ".png";
+        String caminhoDoPrint = ".//evidences// " + pastaDoPrint + " // " + ct + " // " + mensagem + ".png";
 
         File print = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.FILE);
         try {

@@ -18,7 +18,7 @@ Funcionalidade: Realizar Compra
     Entao a compra devera ser realizada com sucesso
     Exemplos:
       | produto                     | quantidade | cor  | tamanho | pagamento |
-      | Faded Short Sleeve T-shirts | 2          | Blue | M       | bankwire  |
+      | Faded Short Sleeve T-shirts | 1          | Blue | M       | bankwire  |
 
   @TESTE-04
   Esquema do Cenario: Comprar uma peça na vitrine
