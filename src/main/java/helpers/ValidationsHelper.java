@@ -9,6 +9,8 @@ public class ValidationsHelper {
     static String tamanho;
     static String cor;
     static float valorFrete;
+    static String ct;
+    static String nomeCt;
 
     // -------- Getters e Setters --------
 
@@ -58,6 +60,22 @@ public class ValidationsHelper {
 
     public void setValorFrete(float valorFrete) {
         this.valorFrete = valorFrete;
+    }
+
+    public String getCt() {
+        return ct;
+    }
+
+    public void setCt(String ct) {
+        ValidationsHelper.ct = ct;
+    }
+
+    public String getNomeCt() {
+        return nomeCt;
+    }
+
+    public void setNomeCt(String nomeCt) {
+        ValidationsHelper.nomeCt = nomeCt;
     }
 
     // -------- Métodos --------

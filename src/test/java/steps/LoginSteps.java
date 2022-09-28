@@ -21,8 +21,13 @@ public class LoginSteps {
     }
 
     @Quando("preencher os campos com dados validos:")
-    public void preencher_os_campos_com_dados_validos(DataTable dataTable) {
+    public void preencherOsCamposComDadosValidos(DataTable dataTable) {
         login.logar(dataTable);
+    }
+
+    @Quando("preencher os campos com dados validos")
+    public void preencherOsCamposComDadosValidos(){
+        login.logar();
     }
 
     @Então("o login é realizado com sucesso")
@@ -30,9 +35,5 @@ public class LoginSteps {
         myAccount.validarMyAccount();
     }
 
-    @Quando("preencher os campos com dados validos")
-    public void preencherOsCamposComDadosValidos(){
-
-    }
 
 }
