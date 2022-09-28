@@ -44,7 +44,7 @@ public class SummaryPage extends BasePage {
 
         float totalProduto = Float.parseFloat(txtPrecoTotal.getText().replace("$",""));
         float calculoPrecoTotal = validations.calcularTotalDaCompra();
-        
+
         WebElement txtProduto = driver.findElement(By.xpath("(//p[@class='product-name']//a[contains(text(),'" + validations.getNomeProduto() + "')])[2]"));
 
         System.out.println(calculoPrecoTotal + " tem que ser igual " + totalProduto);

@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import core.DriverFactory;
+import core.TestDataReader;
 import io.cucumber.datatable.DataTable;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ public class LoginPage extends BasePage{
         PageFactory.initElements(driver, this);
     }
     Faker faker=new Faker();
+    TestDataReader dataReader = new TestDataReader();
 
 //    Mapeamento
 
@@ -57,4 +59,12 @@ public class LoginPage extends BasePage{
         signIn.click();
         espera(2);
     }
+
+    public void logar(){
+        emailAddress.sendKeys(dataReader.getDt("in_email"));
+        password.sendKeys(dataReader.getDt("in_senha"));
+        signIn.click();
+        espera(2);
+    }
+
 }

@@ -30,4 +30,9 @@ public class LoginSteps {
         myAccount.validarMyAccount();
     }
 
+    @Quando("preencher os campos com dados validos")
+    public void preencherOsCamposComDadosValidos(){
+
+    }
+
 }

@@ -34,7 +34,6 @@ public class HomePage extends BasePage {
         esperarElementoEstarVisivel(signIn, 10);
         signIn.click();
         espera(3);
-
     }
 
 
